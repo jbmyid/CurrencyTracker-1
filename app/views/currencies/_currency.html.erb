@@ -1,0 +1,7 @@
+<tr id="country_<%= currency.code %>">
+  <td><%= currency.name %></td>
+  <td><%= currency.code %></td>
+  <td><%= currency.collected_by?(current_user) ? 'Collected' : 'Not Collected' %></td>
+  <td><%= check_box_tag "currency_ids[]", currency.code, currency.collected_by?(current_user), class: "currency_check" %>
+  <td><%= link_to 'Show', currency %></td>
+</tr>

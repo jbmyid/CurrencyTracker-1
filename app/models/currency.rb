@@ -24,7 +24,7 @@ class Currency < ActiveRecord::Base
   end
 
   def self.collected_by(user)
-    joins(:country=>[:countries_users])
+    joins(:country=>[:countries_users]).where("countries_users.user_id=?", user.id)
   end
 
   def self.not_collected_by(user)

@@ -1,0 +1,7 @@
+html = "<tbody id='currencies'><%= j(render(@currencies).html_safe) %></tbody>"
+$("#currencies").replaceWith(html);
+pie_chart = "<%= j(render('currencies/currency_pie_chart').html_safe) %>"
+$("#collected_currencies_chart").replaceWith(pie_chart)
+$('.simple_pie_chart').each(function() {
+  SimplePieChart.initialize(this);
+});

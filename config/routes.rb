@@ -9,6 +9,8 @@ CurrencyTracker::Application.routes.draw do
 
   resources :countries_users, only: [:create]
 
+  resources :currencies_users, only: [:create]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

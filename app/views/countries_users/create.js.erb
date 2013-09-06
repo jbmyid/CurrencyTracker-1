@@ -1,0 +1,7 @@
+html = "<tbody id='countries'><%= j(render(@countries).html_safe) %></tbody>"
+$("#countries").replaceWith(html);
+pie_chart = "<%= j(render('countries/country_pie_chart').html_safe) %>"
+$("#visited_countries_chart").replaceWith(pie_chart)
+$('.simple_pie_chart').each(function() {
+  SimplePieChart.initialize(this);
+});

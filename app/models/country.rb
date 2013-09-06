@@ -18,4 +18,12 @@ class Country < ActiveRecord::Base
   def visited_by?(user)
   	countries_users.map(&:user_id).include?(user.id)
   end
+
+  def self.visited_by(user)
+    joins(:countries_users).where("countries_users.user_id=?",user.id)
+  end
+
+  def self.not_visited_by(user)
+    where("code NOT IN (?)", visited_by(user).pluck("code"))
+  end
 end

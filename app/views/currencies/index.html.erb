@@ -1,33 +1,32 @@
 <section>
-  <div id="collected_currencies_chart" class="simple_pie_chart" width='300px' height='100px'>
-    <table>
-      <tr>
-        <th>Collected</th>
-        <td><%= Currency.collected_by(current_user).count %></td>
-      </tr><tr>
-        <th>Not Collected</th>
-        <td><%= Currency.not_collected_by(current_user).count %></td>
-      </tr>
-    </table>
-  </div>
-
+  <%= render "currency_pie_chart" %>
   <h1>Currencies</h1>
-
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Code</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-
-  <% @currencies.each do |currency| %>
-    <tr>
-      <td><%= currency.name %></td>
-      <td><%= currency.code %></td>
-      <td><%= currency.collected_by?(current_user) ? 'Collected' : 'Not Collected' %></td>
-      <td><%= link_to 'Show', currency %></td>
-    </tr>
+  <%= form_tag currencies_users_path, method: "POST", remote: true do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Status</th>
+          <th>
+            <%= check_box_tag :all, true, true,id: "select_all_currencies" %>
+            <%= submit_tag "Visit" %>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="currencies">  
+        <% @currencies.each do |currency| %>
+          <%= render currency%>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
-  </table>
 </section>
+
+
+<script type="text/javascript">
+  $(function(){
+    check_uncheck_all("#select_all_currencies", ".currency_check")
+  })
+</script>
