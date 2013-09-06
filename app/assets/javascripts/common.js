@@ -11,4 +11,3 @@ function check_uncheck_all(all_selector, check_boxes){
 		})
 	})
 }
-

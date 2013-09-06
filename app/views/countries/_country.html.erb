@@ -2,7 +2,11 @@
     <td class="filter"><%= country.name %></td>
     <td><%= country.code %></td>
     <td><%= country.visited_by?(current_user) ? 'Visited' : 'Not Visited' %></td>
-    <td><%= check_box_tag "country_ids[]", country.code, country.visited_by?(current_user), class: "country_check" %></td>
+    <td>
+    	<% unless country.visited_by?(current_user) %>
+    		<%= check_box_tag "country_ids[]", country.code, country.visited_by?(current_user), class: "country_check" %>
+    	<% end %>
+    </td>
     <td><%= link_to 'Show', country %></td>
     <td><%= link_to 'Edit', edit_country_path(country) %></td>
 </tr>

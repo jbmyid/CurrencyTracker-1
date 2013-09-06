@@ -11,7 +11,15 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :countries
 
   def collect_currencies(currency_codes)
-  	currencies = Currency.where("code in (?)", currency_codes).includes(:country).map{|currency| currency.country.code}
-  	self.country_ids = currencies
+  	new_countrie = Currency.where("code in (?)", currency_codes).includes(:country).map{|currency| currency.country}
+    new_countrie.each do |c|
+      self.countries << c  
+    end
+  end
+
+  def visit_countries(country_codes)
+    Country.where("code in (?)", country_codes).each do |c|
+      self.countries << c
+    end
   end
 end
