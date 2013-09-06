@@ -8,15 +8,30 @@ class Currency < ActiveRecord::Base
 
   belongs_to :country
 
+  # Fires mutiple queries
   def self.collected
     all.select {|currency| currency.collected? }
   end
 
+  # Fires mutiple queries
   def self.not_collected
     all.reject {|currency| currency.collected? }
   end
 
+  # Fires mutiple queries
   def collected?
     country.nil? ? false : country.visited?
+  end
+
+  def self.collected_by(user)
+    joins(:country=>[:countries_users])
+  end
+
+  def self.not_collected_by(user)
+    where("code NOT IN (?)", collected_by(user).pluck("currencies.code"))
+  end
+
+  def collected_by?(user)
+    country.nil? ? false : country.visited_by?(user)
   end
 end

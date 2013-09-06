@@ -1,9 +1,13 @@
 CurrencyTracker::Application.routes.draw do
+  devise_for :users
+
   root :to => "currencies#index"
   
   resources :countries, :except => [:new, :destroy]
 
   resources :currencies, :only => [:index, :show]
+
+  resources :countries_users, only: [:create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

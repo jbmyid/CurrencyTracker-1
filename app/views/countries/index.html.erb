@@ -12,24 +12,28 @@
   </div>
 
   <h1>Countries</h1>
+  <%= form_tag countries_users_path, method: "POST" do %>
+    <%= submit_tag "Visit" %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Code</th>
-      <th>Status</th>
-      <th></th>
-      <th></th>
-    </tr>
-
-  <% @countries.each do |country| %>
-    <tr>
-      <td><%= country.name %></td>
-      <td><%= country.code %></td>
-      <td><%= country.visited? ? 'Visited' : 'Not Visited' %></td>
-      <td><%= link_to 'Show', country %></td>
-      <td><%= link_to 'Edit', edit_country_path(country) %></td>
-    </tr>
+    <% @countries.each do |country| %>
+      <tr>
+        <td><%= country.name %></td>
+        <td><%= country.code %></td>
+        <td><%= country.visited_by?(current_user) ? 'Visited' : 'Not Visited' %></td>
+        <td><%= check_box_tag "country_ids[]", country.code, country.visited_by?(current_user) %></td>
+        <td><%= link_to 'Show', country %></td>
+        <td><%= link_to 'Edit', edit_country_path(country) %></td>
+      </tr>
+    <% end %>
+    </table>
   <% end %>
-  </table>
 </section>
