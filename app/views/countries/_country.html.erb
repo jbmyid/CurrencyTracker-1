@@ -1,5 +1,5 @@
 <tr id="country_<%= country.code %>">
-    <td><%= country.name %></td>
+    <td class="filter"><%= country.name %></td>
     <td><%= country.code %></td>
     <td><%= country.visited_by?(current_user) ? 'Visited' : 'Not Visited' %></td>
     <td><%= check_box_tag "country_ids[]", country.code, country.visited_by?(current_user), class: "country_check" %></td>

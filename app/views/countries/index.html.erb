@@ -2,6 +2,10 @@
   <%= render "country_pie_chart" %>
 
   <h1>Countries</h1>
+  <div class="search_div">
+    Filter by Name
+    <%= text_field_tag :search, "" , id: "search_text"%>
+  </div>
   <%= form_tag countries_users_path, method: "POST", remote: true do %>
     <table>
       <tr>
@@ -27,5 +31,6 @@
 <script type="text/javascript">
   $(function(){
     check_uncheck_all("#select_all_countries", ".country_check")
+    filter("table", "#search_text")
   })
 </script>
